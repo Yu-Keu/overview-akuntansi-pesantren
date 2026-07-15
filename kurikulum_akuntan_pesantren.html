@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurikulum Akuntan Pesantren Modern - Pemula Absolut</title>
+    <style>
+        :root {
+            --primary-navy: #14532d; /* Forest Green */
+            --accent-blue: #059669;  /* Emerald Green */
+            --bg-light: #f0fdf4;     /* Mint Light Background */
+            --text-dark: #1f2937;
+            --text-muted: #4b5563;
+            --border-color: #cbd5e1;
+            --success: #15803d;
+            --error: #b91c1c;
+            --card-bg: #ffffff;
+            --touch-target: 44px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        header {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1rem;
+            color: #a7f3d0;
+        }
+
+        .mobile-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 0.75rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .menu-toggle-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            min-height: 38px;
+        }
+
+        .progress-text {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 99;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: -100%;
+            height: 100%;
+            width: 320px;
+            z-index: 100;
+            transition: left 0.3s ease;
+            box-sizing: border-box;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            color: var(--primary-navy);
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: 1px solid transparent;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: var(--touch-target);
+        }
+
+        .nav-link.active {
+            background-color: var(--accent-blue);
+            color: white;
+            font-weight: bold;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background-color: #cbd5e1;
+            color: #475569;
+            white-space: nowrap;
+        }
+
+        .nav-link.active .badge {
+            background-color: rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        .content-area {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary-navy);
+            margin-top: 0;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        h3.fase-title {
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px;
+        }
+
+        /* Key Concepts Badge Box */
+        .key-concepts-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .key-concepts-box h4 {
+            margin: 0 0 0.5rem 0;
+            color: #14532d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .concept-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .concept-tag {
+            background-color: #dcfce7;
+            color: #14532d;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Overview Section */
+        .overview-box {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .overview-box h3 {
+            margin-top: 0;
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Case Box style */
+        .case-box {
+            background-color: #fef3c7;
+            border-left: 4px solid #d97706;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .case-box h4 {
+            margin: 0 0 0.5rem 0;
+            color: #92400e;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Essence Box for detailed theory */
+        .essence-box {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .essence-box h3 {
+            margin-top: 0;
+            color: var(--primary-navy);
+            font-size: 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .essence-box ul {
+            padding-left: 1.25rem;
+            margin-bottom: 0;
+        }
+
+        .essence-box li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* CSS-Native Visual Diagram Blocks */
+        .visual-diagram {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .diagram-node {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .diagram-node.accent {
+            background-color: var(--accent-blue);
+        }
+
+        .diagram-arrow {
+            color: var(--accent-blue);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .visual-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        .visual-table th {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .visual-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+        }
+
+        .visual-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .balance-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f5f9;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .balance-side {
+            width: 45%;
+            background-color: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-navy);
+        }
+
+        .balance-center {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 2.5rem 0;
+            padding: 0 15px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--border-color);
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+            background-color: white;
+            border: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .timeline-step.active {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+
+        .timeline-label {
+            position: absolute;
+            top: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Guided Search Box (Odin style) */
+        .search-guidance {
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .search-guidance h4 {
+            margin-top: 0;
+            color: #065f46;
+            font-size: 1.05rem;
+        }
+
+        .query-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.75rem 0 0 0;
+        }
+
+        .query-item {
+            background: white;
+            border: 1px solid #d1fae5;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .query-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #065f46;
+            text-transform: uppercase;
+        }
+
+        .query-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .query-text {
+            font-family: monospace;
+            color: #047857;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+
+        .search-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-navy);
+        }
+
+        /* Practical Tasks Widget */
+        .practical-task-box {
+            background-color: #f0fdfa;
+            border: 2px dashed #0d9488;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .practical-task-box h4 {
+            margin-top: 0;
+            color: #0f766e;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .task-input-group {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .task-input-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .practical-input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        /* Concept Checklist */
+        .checklist-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .checklist-box h4 {
+            margin-top: 0;
+            color: #166534;
+            font-size: 1.05rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .check-item input {
+            margin-top: 0.2rem;
+            min-width: 18px;
+            min-height: 18px;
+        }
+
+        /* Rigorous verification quiz box */
+        .verification-box {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: #fff;
+        }
+
+        .verification-box h4 {
+            margin-top: 0;
+            color: var(--primary-navy);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .option-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 0.85rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            min-height: var(--touch-target);
+            font-size: 0.95rem;
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            min-width: 18px;
+            min-height: 18px;
+        }
+
+        .btn-action {
+            width: 100%;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            min-height: var(--touch-target);
+        }
+
+        .btn-action:hover {
+            background-color: var(--accent-blue);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .feedback.correct {
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            color: #14532d;
+        }
+
+        .feedback.incorrect {
+            background-color: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #7f1d1d;
+        }
+
+        .progress-bar-container {
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            height: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background-color: var(--success);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .btn-reset {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 2rem;
+            min-height: var(--touch-target);
+        }
+
+        .btn-reset:hover {
+            background-color: #cbd5e1;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-nav-bar {
+                display: none;
+            }
+            .container {
+                grid-template-columns: 340px 1fr;
+                padding: 2rem 1rem;
+            }
+            .sidebar {
+                position: sticky;
+                top: 20px;
+                left: 0;
+                height: auto;
+                max-height: calc(100vh - 40px);
+                overflow-y: auto;
+                z-index: 1;
+                width: auto;
+                box-shadow: none;
+                background: none;
+                border-right: none;
+                padding: 0;
+            }
+            .sidebar h3 {
+                border-bottom: 2px solid var(--border-color);
+            }
+            .sidebar h3 .close-btn {
+                display: none;
+            }
+            .content-area {
+                padding: 2.5rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+            .btn-action {
+                width: auto;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kurikulum Akuntan Pesantren Modern</h1>
+        <p>Jalur Belajar Mandiri Interaktif bagi Pemula Absolut (Zero Knowledge) [1]</p>
+    </header>
+
+    <div class="mobile-nav-bar">
+        <button class="menu-toggle-btn" onclick="toggleSidebar(true)">☰ Daftar Modul</button>
+        <span id="mobileProgress" class="progress-text">Progres: 0%</span>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
+    <div class="container">
+        <!-- NAVIGATION SIDEBAR -->
+        <aside id="sidebar" class="sidebar">
+            <h3>
+                <span>Peta Jalan Belajar</span>
+                <button class="close-btn" onclick="toggleSidebar(false)">✕</button>
+            </h3>
+
+            <h3 class="fase-title">Fase 0 — Orientasi Cara Berpikir</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn0" class="nav-link active" onclick="showSection(0)">
+                        <span>0.1. Mengapa Perlu Akuntansi?</span>
+                        <span id="badge0" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn1" class="nav-link" onclick="showSection(1)">
+                        <span>0.2. Mengenal Transaksi & Bukti</span>
+                        <span id="badge1" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn2" class="nav-link" onclick="showSection(2)">
+                        <span>0.3. Istilah Dasar Terpenting</span>
+                        <span id="badge2" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn3" class="nav-link" onclick="showSection(3)">
+                        <span>0.4. Pencatatan Berpasangan</span>
+                        <span id="badge3" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <h3 class="fase-title">Fase 1 — Fondasi Siklus Akuntansi</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn4" class="nav-link" onclick="showSection(4)">
+                        <span>M1. Dari Bukti Ke Jurnal</span>
+                        <span id="badge4" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn5" class="nav-link" onclick="showSection(5)">
+                        <span>M2. Buku Besar & Neraca Saldo</span>
+                        <span id="badge5" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn6" class="nav-link" onclick="showSection(6)">
+                        <span>M3. Persamaan & Bagan Akun</span>
+                        <span id="badge6" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn7" class="nav-link" onclick="showSection(7)">
+                        <span>M4. Jurnal Penyesuaian Akrual</span>
+                        <span id="badge7" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn8" class="nav-link" onclick="showSection(8)">
+                        <span>M5. Tutup Buku Akhir Periode</span>
+                        <span id="badge8" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <h3 class="fase-title">Fase 2 — Akuntansi Nirlaba Pesantren</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn9" class="nav-link" onclick="showSection(9)">
+                        <span>M6. Laporan Aktivitas Yayasan</span>
+                        <span id="badge9" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn10" class="nav-link" onclick="showSection(10)">
+                        <span>M7. Pengelolaan Wakaf & ZIS</span>
+                        <span id="badge10" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn11" class="nav-link" onclick="showSection(11)">
+                        <span>M8. SPP & Kebijakan Beasiswa</span>
+                        <span id="badge11" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <h3 class="fase-title">Fase 3 — Unit Usaha di Pesantren</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn12" class="nav-link" onclick="showSection(12)">
+                        <span>M9. Koperasi & Kantin Santri</span>
+                        <span id="badge12" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn13" class="nav-link" onclick="showSection(13)">
+                        <span>M10. Kas Kecil & Bank Syariah</span>
+                        <span id="badge13" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <h3 class="fase-title">Fase 4 — Pelaporan & Analisis</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn14" class="nav-link" onclick="showSection(14)">
+                        <span>M11. Jurnal Koreksi Kesalahan</span>
+                        <span id="badge14" class="badge">0%</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="navBtn15" class="nav-link" onclick="showSection(15)">
+                        <span>M12. Pertanggungjawaban LPJ</span>
+                        <span id="badge15" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <h3 class="fase-title">Fase 5 — Proyek Akhir</h3>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <button id="navBtn16" class="nav-link" onclick="showSection(16)">
+                        <span>M13. Capstone Project Tahunan</span>
+                        <span id="badge16" class="badge">0%</span>
+                    </button>
+                </li>
+            </ul>
+
+            <button class="btn-reset" onclick="resetAllProgress()">Atur Ulang Progres</button>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="content-area">
+
+            <!-- MODUL 0.1 -->
+            <section id="section0" class="section active">
+                <h2>Modul 0.1: Apa itu Akuntansi dan Kenapa Pesantren Membutuhkannya?</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Amanah Dana Umat</span>
+                        <span class="concept-tag">Catatan Sederhana</span>
+                        <span class="concept-tag">Fungsi Informasi</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Bayangkan seorang ibu rumah tangga yang mencatat uang belanja sayur di buku tulis bergaris atau pemilik warung kelontong yang mencatat utang pelanggan. Itu adalah bentuk akuntansi paling sederhana. Akuntansi bukan sekadar rumus matematika yang rumit, melainkan <strong>alat bantu bercerita</strong> mengenai aliran uang pesantren yang diamanahkan oleh masyarakat (wali santri, donatur).</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Dapur Tanpa Catatan</h4>
+                    <p>Di Pesantren Darul Amanah, juru masak asrama ingin memasak sarapan untuk 200 santri besok pagi. Karena Bendahara Pesantren (Ustadz Mansur) tidak mencatat sisa dana dan persediaan beras, juru masak tidak tahu apakah masih ada uang untuk membeli telur. Kebingungan ini melumpuhkan dapur. Di sini Kyai Hasyim menjelaskan bahwa tanpa catatan keuangan, kegiatan pelayanan mulia pesantren bisa terhenti seketika.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div class="diagram-node">Amanah Umat (Masuk)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">Sistem Catat Akuntan</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">Layanan Santri (Keluar)</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Amanah Dana Umat:</strong> Pesantren mengelola uang publik (syahriah, zakat, wakaf). Mencatat uang masuk dan keluar merupakan bagian dari perintah menjaga amanah keagamaan (QS. Al-Baqarah: 282).</li>
+                        <li><strong>Mencatat karena Berguna:</strong> Catatan keuangan membantu pengurus mengambil keputusan logis (misalnya: apakah kas yang ada cukup untuk membayar belanja bahan pokok dapur umum bulan depan).</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Pentingnya pencatatan keuangan yayasan pesantren nirlaba"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Pentingnya+pencatatan+keuangan+yayasan+pesantren+nirlaba" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka program spreadsheet kosong di komputer Anda. Di baris pertama, ketik daftar rencana belanja mingguan dapur asrama Anda. Ketik kata <strong>BELANJA</strong> (menggunakan huruf kapital penuh) di sel B1 untuk membiasakan penataan penulisan sel dasar.</p>
+                    <div class="task-input-group">
+                        <label for="p1">Ketik kata kunci huruf kapital yang baru saja Anda tulis di sel B1 tersebut:</label>
+                        <input type="text" id="p1" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c0_1" onchange="saveChecklistState()">
+                        <span>Saya memahami mengapa pesantren wajib mengelola catatan demi akuntabilitas amanah umat.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 0.1</h4>
+                    <p>Apa perbedaan mendasar antara akuntansi di perusahaan komersial (perseroan terbatas) dengan akuntansi di yayasan nirlaba seperti pesantren?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q1" value="A">
+                            <span>Perusahaan komersial memakai matematika, sedangkan yayasan tidak memakai hitungan matematika sama sekali.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q1" value="B">
+                            <span>Perusahaan berfokus mengukur tingkat keuntungan pemilik modal, sedangkan yayasan berfokus menyajikan transparansi pengelolaan amanah dana publik.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q1', 'B', 'fb1', 0)">Kirim & Verifikasi</button>
+                    <div id="fb1" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 0.2 -->
+            <section id="section1" class="section">
+                <h2>Modul 0.2: Mengenal Transaksi dan Bukti Transaksi</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Transaksi</span>
+                        <span class="concept-tag">Bukti Fisik</span>
+                        <span class="concept-tag">Kuitansi & Nota</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Tidak semua kejadian di pesantren dicatat oleh akuntan. Kejadian yang menyebabkan perubahan nilai kepemilikan uang atau barang disebut <strong>transaksi</strong>. Agar suatu transaksi dapat dipercaya oleh pihak luar (auditor/donatur), transaksi tersebut wajib disertai kertas fisik pelindung yang dinamakan <strong>bukti transaksi</strong>.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Nota dari Toko Beras</h4>
+                    <p>Ustadz Mansur membeli beras seharga Rp500.000 secara tunai dari "Toko Beras Barokah" untuk stok pangan dapur santri. Pemilik toko memberikan secarik kertas kecil berisi tulisan barang, harga, tanggal, dan tanda tangan cap basah. Kertas kecil inilah yang disebut Nota Pembelian (Bukti Transaksi). Tanpa kertas ini, Ustadz Mansur tidak boleh mencatat pengeluaran kas di buku besar pesantren karena tidak memiliki bukti pertanggungjawaban fisik.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div class="diagram-node">Aktivitas Belanja</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">Dokumen Bukti (Nota/Kuitansi)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">Buku Catatan Keuangan</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Transaksi Ekonomi:</strong> Peristiwa pertukaran nilai uang atau barang milik pesantren (seperti santri membayar uang syahriah bulanan, atau bendahara membayar belanja semen).</li>
+                        <li><strong>Bukti Transaksi (Source Document):</strong> Dokumen legal pelindung (struk transfer bank, nota pasar, kuitansi bermeterai) yang menyatakan transaksi tersebut benar-benar terjadi, bukan rekayasa.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Jenis bukti transaksi keuangan dalam audit yayasan"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Jenis+bukti+transaksi+keuangan+dalam+audit+yayasan" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka lembar kerja spreadsheet Anda. Di sel A1, ketik kata <strong>KUITANSI</strong> (huruf kapital penuh) sebagai simulasi judul berkas pembantu pengarsipan dokumen kas masuk pesantren.</p>
+                    <div class="task-input-group">
+                        <label for="p2">Ketik kata judul kapital yang Anda input di sel A1 tersebut:</label>
+                        <input type="text" id="p2" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c1_1" onchange="saveChecklistState()">
+                        <span>Saya bisa membedakan mana kejadian biasa dan mana transaksi ekonomi yang wajib dicatat.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 0.2</h4>
+                    <p>Juru masak pesantren membeli sayur mayur langsung dari petani lokal di pasar tradisional seharga Rp150.000, namun petani tersebut tidak memiliki mesin cetak struk atau kuitansi formal. Apa tindakan paling tepat dari bendahara pesantren?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q2" value="A">
+                            <span>Mengabaikan pencatatan pengeluaran tersebut karena tidak memiliki bukti cetak kuitansi formal dari komputer.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q2" value="B">
+                            <span>Membuat Surat Pernyataan Pengeluaran Riil (kuitansi internal) yang ditandatangani oleh pembeli dan diketahui bendahara agar pengeluaran sah tercatat.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q2', 'B', 'fb2', 1)">Kirim & Verifikasi</button>
+                    <div id="fb2" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 0.3 -->
+            <section id="section2" class="section">
+                <h2>Modul 0.3: Istilah Dasar yang Wajib Dikenal Duluan</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Aset (Kekayaan)</span>
+                        <span class="concept-tag">Liabilitas (Utang)</span>
+                        <span class="concept-tag">Pendapatan</span>
+                        <span class="concept-tag">Beban (Biaya)</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Sebelum belajar menjurnal, kita wajib mengenal "bahasa" akuntan. Akuntan memilah seluruh kejadian transaksi keuangan ke dalam empat kotak dasar. Anda harus memahami perbedaan fungsi keempat kotak dasar ini menggunakan contoh riil operasional harian di pesantren.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Mengidentifikasi Kekayaan & Kewajiban</h4>
+                    <p>Pesantren Darul Amanah mendirikan gedung asrama baru senilai Rp300.000.000 (Aset). Untuk membeli semen pendukung, pesantren berutang kepada Toko Bangunan Lancar Jaya sebesar Rp10.000.000 (Liabilitas). Bulan ini, pesantren menerima iuran SPP santri sebesar Rp15.000.000 (Pendapatan) dan harus membayar tagihan air bulanan sebesar Rp1.200.000 (Beban). Ustadz Mansur bertugas mencatat dan memilah masing-masing transaksi ke dalam laci akun yang tepat.</p>
+                </div>
+
+                <table class="visual-table">
+                    <thead>
+                        <tr>
+                            <th>Klasifikasi Akun</th>
+                            <th>Penjelasan Karakteristik</th>
+                            <th>Contoh di Pesantren</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Aset</strong></td>
+                            <td>Kekayaan bernilai yang dikuasai yayasan</td>
+                            <td>Uang Kas, Gedung Asrama, Mobil Operasional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liabilitas</strong></td>
+                            <td>Kewajiban bayar masa depan (Utang)</td>
+                            <td>Utang Toko Bahan Bangunan, Sisa Cicilan Bus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pendapatan</strong></td>
+                            <td>Aliran kas masuk dari kegiatan syiar</td>
+                            <td>Uang SPP/Syahriah, Donasi Infaq Umum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beban</strong></td>
+                            <td>Biaya konsumsi habis pakai operasional</td>
+                            <td>Beras Dapur, Tagihan Listrik, Gaji Ustadz</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Aset (Kotak 1):</strong> Segala barang berharga yang dimiliki atau dikuasai pesantren (contoh: gedung asrama, kas di brankas, mobil operasional).</li>
+                        <li><strong>Liabilitas / Utang (Kotak 2):</strong> Kewajiban membayar kepada pihak luar akibat kejadian masa lalu (contoh: utang pembelian semen ke toko bangunan).</li>
+                        <li><strong>Pendapatan (Kotak 3):</strong> Aliran uang masuk hasil aktivitas pesantren (contoh: penerimaan uang SPP/Syahriah santri, dana infaq).</li>
+                        <li><strong>Beban (Kotak 4):</strong> Nilai barang/jasa habis pakai yang dikorbankan demi menunjang operasional harian (contoh: beban bayar tagihan listrik, belanja bahan makanan dapur).</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Klasifikasi aset liabilitas pendapatan beban yayasan nirlaba"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Klasifikasi+aset+liabilitas+pendapatan+beban+yayasan+nirlaba" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka lembar kerja spreadsheet Anda. Di sel C1, ketik kata <strong>ASET</strong> (huruf kapital penuh) untuk mematangkan pengelompokan penulisan pos kekayaan lancar.</p>
+                    <div class="task-input-group">
+                        <label for="p3">Ketik kata kunci klasifikasi kapital yang Anda input di sel C1 tersebut:</label>
+                        <input type="text" id="p3" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c2_1" onchange="saveChecklistState()">
+                        <span>Saya dapat membedakan dengan lancar antara aset (yang dimiliki) dan beban (biaya habis pakai).</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 0.3</h4>
+                    <p>Pesantren membelanjakan uang kas tunai sebesar Rp8.000.000 untuk membeli satu unit komputer baru kantor sekretariat yang diperkirakan awet dipakai selama 5 tahun ke depan. Pembelian komputer ini masuk klasifikasi golongan apa?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q3" value="A">
+                            <span>Aset (karena berumur panjang di atas satu tahun dan memberi manfaat jangka panjang).</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q3" value="B">
+                            <span>Beban (karena uang kas tunai milik pesantren langsung keluar seketika saat pembelian komputer).</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q3', 'A', 'fb3', 2)">Kirim & Verifikasi</button>
+                    <div id="fb3" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 0.4 -->
+            <section id="section3" class="section">
+                <h2>Modul 0.4: Konsep Pencatatan Berpasangan (Sebelum "Debit/Kredit")</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Keseimbangan Dua Sisi</span>
+                        <span class="concept-tag">Debit (Kiri)</span>
+                        <span class="concept-tag">Kredit (Kanan)</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Setiap transaksi di dunia ini selalu memengaruhi dua sisi sekaligus secara berpasangan. Jika pesantren menerima kas dari santri Rp100.000, maka ada dua hal yang berubah: (1) Uang Kas pesantren bertambah, dan (2) Hak Tagih (Pendapatan SPP) juga bertambah. Akuntan tidak mencatat satu sisi saja.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Sisi Kiri & Sisi Kanan Timbangan</h4>
+                    <p>Santri Ahmad membayar uang syahriah (SPP) bulanan sebesar Rp100.000 tunai kepada Ustadz Mansur. Sebagai akuntan, Ustadz Mansur melihat timbangan dua sisi: Sisi kiri (Debit) mencatat penambahan fisik uang tunai Rp100.000 dalam laci Kas. Sisi kanan (Kredit) mencatat asal usul uang tersebut yaitu dari Pendapatan SPP senilai Rp100.000. Catatan wajib seimbang di kedua sisi agar tidak ada uang siluman.</p>
+                </div>
+
+                <div class="balance-container">
+                    <div class="balance-side">KIRI (Debit) <br> Kas Bertambah <br> + Rp100.000</div>
+                    <div class="balance-center">⚖️</div>
+                    <div class="balance-side">KANAN (Kredit) <br> SPP Bertambah <br> + Rp100.000</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Keseimbangan Sisi (Double-Entry):</strong> Konsep di mana setiap kenaikan aset atau pengeluaran beban pasti memiliki sumber asal pendanaan penyeimbang dari sisi hak/kewajiban.</li>
+                        <li><strong>Debit & Kredit:</strong> Dua kata latin yang sering disalahpahami. Hilangkan asumsi bahwa debit itu "baik/bertambah" dan kredit itu "buruk/berkurang". Secara akuntansi dasar, <strong>Debit hanyalah nama posisi Kiri</strong> dan <strong>Kredit hanyalah nama posisi Kanan</strong>.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Asal mula istilah debit kredit kiri kanan pembukuan berpasangan"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Asal+mula+istilah+debit+kredit+kiri+kanan+pembukuan+berpasangan" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka lembar kerja spreadsheet Anda. Di sel A1, ketik kata <strong>KIRI</strong> (huruf kapital penuh) sebagai jembatan ingatan visual bahwa letak posisi akun Debit berada di sisi sebelah kiri pembukuan Anda.</p>
+                    <div class="task-input-group">
+                        <label for="p4">Ketik kata pengingat posisi sebelah kiri tersebut dalam huruf kapital penuh:</label>
+                        <input type="text" id="p4" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c3_1" onchange="saveChecklistState()">
+                        <span>Saya memahami bahwa debit dan kredit murni merupakan nama posisi penulisan kolom kiri dan kanan.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 0.4</h4>
+                    <p>Apa arti dari kata "Debit" dan "Kredit" dalam dasar pencatatan pembukuan akuntansi yang sesungguhnya?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q4" value="A">
+                            <span>Debit artinya saldo uang bertambah di bank, sedangkan Kredit artinya saldo uang berkurang atau penarikan utang.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q4" value="B">
+                            <span>Debit hanyalah penunjuk posisi pencatatan di sisi kiri, sedangkan Kredit hanyalah penunjuk posisi pencatatan di sisi kanan.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q4', 'B', 'fb4', 3)">Kirim & Verifikasi</button>
+                    <div id="fb4" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 1 -->
+            <section id="section4" class="section">
+                <h2>Modul 1: Dari Bukti Transaksi ke Jurnal Umum</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Aturan Saldo Normal</span>
+                        <span class="concept-tag">Penjurnal Umum</span>
+                        <span class="concept-tag">Debit Kredit Berpasangan</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Setelah menguasai arah kiri-kanan di Fase 0, saatnya mempraktikkan proses penjurnalan resmi. Penjurnalan adalah kegiatan memindahkan informasi transaksi dari lembar kuitansi fisik ke dalam tabel catatan kronologis harian pesantren.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Menjurnal Penerimaan SPP</h4>
+                    <p>Pesantren Darul Amanah menerbitkan kuitansi terima pembayaran tunai SPP bulanan santri bernama Fathur sebesar Rp1.000.000. Ustadz Mansur langsung membuka Jurnal Umum: Aset berupa Kas bertambah Rp1.000.000 (Debit - Sisi Kiri) dan Pendapatan SPP bertambah sebesar Rp1.000.000 (Kredit - Sisi Kanan). Keduanya ditulis berpasangan dalam satu baris tanggal transaksi.</p>
+                </div>
+
+                <table class="visual-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Akun Klasifikasi</th>
+                            <th>Debit (Kiri)</th>
+                            <th>Kredit (Kanan)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10 Jan</td>
+                            <td><strong>Kas</strong> (Aset Bertambah)</td>
+                            <td>Rp1.000.000</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>10 Jan</td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Pendapatan SPP</strong> (Pendapatan Bertambah)</td>
+                            <td>-</td>
+                            <td>Rp1.000.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Aturan Saldo Normal:</strong> Kesepakatan akuntansi dunia:
+                            <br>- Akun <strong>Aset</strong> dan <strong>Beban</strong> bertambah di posisi <strong>Debit (Kiri)</strong>.
+                            <br>- Akun <strong>Liabilitas</strong> dan <strong>Pendapatan</strong> bertambah di posisi <strong>Kredit (Kanan)</strong>.
+                        </li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Cara mencatat jurnal umum penerimaan SPP komersial vs nirlaba"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Cara+mencatat+jurnal+umum+penerimaan+SPP+komersial+vs+nirlaba" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Simulasikan pencatatan penerimaan dana kas masuk dari SPP santri tunai Rp1.000.000 menggunakan rumus kalkulasi spreadsheet. Di sel A1, ketik formula `=SUM(1000000)` untuk mengunci nilai input angka.</p>
+                    <div class="task-input-group">
+                        <label for="p5">Ketik nilai hasil angka formula spreadsheet tersebut (tanpa lambang mata uang dan tanpa titik):</label>
+                        <input type="number" id="p5" class="practical-input" placeholder="Contoh: 1000000" oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c4_1" onchange="saveChecklistState()">
+                        <span>Saya hafal di luar kepala tabel aturan saldo normal pertambahan akun.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 1</h4>
+                    <p>Pesantren menerima uang tunai sumbangan infaq bebas dari seorang wali santri sebesar Rp5.000.000. Bagaimana jurnal transaksi pencatatan kas masuk yang benar?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q5" value="A">
+                            <span>Debit: Kas Rp5.000.000 | Kredit: Pendapatan Infaq Rp5.000.000</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q5" value="B">
+                            <span>Debit: Pendapatan Infaq Rp5.000.000 | Kredit: Kas Rp5.000.000</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q5', 'A', 'fb5', 4)">Kirim & Verifikasi</button>
+                    <div id="fb5" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 2 -->
+            <section id="section5" class="section">
+                <h2>Modul 2: Dari Jurnal ke Buku Besar dan Neraca Saldo</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Posting Buku Besar</span>
+                        <span class="concept-tag">Akun T-Account</span>
+                        <span class="concept-tag">Alat Cek Neraca Saldo</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Jurnal umum mencatat transaksi bercampur berdasarkan tanggal. Agar kita tahu berapa sisa saldo uang Kas saja atau saldo Beban Dapur saja, kita harus memilah dan memindahkan catatan tersebut ke wadah pengelompokan akun masing-masing yang disebut <strong>Buku Besar (Ledger)</strong>.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Laci Khusus Akun Kas</h4>
+                    <p>Sepanjang bulan, pesantren menerima kas masuk Rp10.000.000 dan mengeluarkan kas tunai Rp4.000.000 untuk belanja operasional dapur. Ustadz Mansur memposting seluruh catatan kas yang terserak di jurnal tersebut ke dalam Buku Besar khusus bertajuk "1101 - Kas". Dengan mengurangkan total debit dengan total kredit, ia tahu persis saldo sisa riil kas saat ini adalah Rp6.000.000 tanpa perlu menghitung fisik isi brankas setiap menit.</p>
+                </div>
+
+                <div class="balance-container" style="flex-direction: column;">
+                    <div style="font-weight: bold; margin-bottom: 5px;">Buku Besar: KAS (T-Account)</div>
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <div style="width: 48%; text-align: left; border-right: 2px solid var(--primary-navy); padding-right: 10px;">
+                            <strong>Debit (Masuk)</strong><br>
+                            + Rp10.000.000
+                        </div>
+                        <div style="width: 48%; text-align: right; padding-left: 10px;">
+                            <strong>Kredit (Keluar)</strong><br>
+                            - Rp4.000.000
+                        </div>
+                    </div>
+                    <div style="border-top: 2px solid var(--primary-navy); width: 100%; margin-top: 10px; padding-top: 5px; text-align: left; font-weight: bold; color: var(--success);">
+                        Saldo Bersih Akhir: Rp6.000.000 (Debit)
+                    </div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Posting:</strong> Aktivitas memindahkan catatan dari lembar jurnal umum ke buku besar pembantu.</li>
+                        <li><strong>Buku Besar T-Account:</strong> Bagan pemilah sederhana berbentuk huruf T dengan sisi kiri sebagai debit dan kanan sebagai kredit untuk merekap mutasi saldo akun sejenis.</li>
+                        <li><strong>Neraca Saldo:</strong> Lembar pengumpul ringkasan saldo akhir buku besar sebelum penyusunan laporan keuangan berjalan.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Posting buku besar t-account nirlaba yayasan"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Posting+buku+besar+t-account+nirlaba+yayasan" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Akun Kas memiliki mutasi di sisi Debit Rp10.000.000 (sel B1) dan mutasi di Kredit Rp4.000.000 (sel B2). Tulis formula pengurangan `=B1-B2` di sel B3 untuk mencari saldo akhir.</p>
+                    <div class="task-input-group">
+                        <label for="p6">Berapakah saldo sisa akhir Kas yang dihasilkan formula sel B3 tersebut?</label>
+                        <input type="number" id="p6" class="practical-input" placeholder="Masukkan angka sisa..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c5_1" onchange="saveChecklistState()">
+                        <span>Saya tahu cara memindahkan mutasi jurnal ke dalam bagan buku besar.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 2</h4>
+                    <p>Apa guna utama dari kegiatan posting memindahkan catatan keuangan dari Jurnal Umum ke dalam Buku Besar?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q6" value="A">
+                            <span>Menjamin agar kasir tidak dapat mencuri uang di kas pesantren.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q6" value="B">
+                            <span>Mengelompokkan data transaksi sejenis agar kita tahu saldo akhir sisa bersih dari masing-masing akun.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q6', 'B', 'fb6', 5)">Kirim & Verifikasi</button>
+                    <div id="fb6" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 3 -->
+            <section id="section6" class="section">
+                <h2>Modul 3: Persamaan Akuntansi & Bagan Akun Pesantren</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Aset = Liabilitas + Aset Neto</span>
+                        <span class="concept-tag">Chart of Accounts (COA)</span>
+                        <span class="concept-tag">Kode Akun</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Pesantren dikelola sebagai entitas yayasan nirlaba, sehingga persamaan dasarnya adalah <code>Aset = Liabilitas + Aset Neto</code> (bukan modal/ekuitas, karena tidak memiliki saham komersial). Bagan Akun disusun sederhana menggunakan struktur kode digital kepala satu hingga lima.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Mengisi Bagan Akun Yayasan</h4>
+                    <p>Darul Amanah memiliki aset fisik tanah, asrama, dan kas senilai total Rp500.000.000. Di sisi lain, pesantren memiliki kewajiban utang bangunan sebesar Rp50.000.000. Menurut prinsip keseimbangan nirlaba, sisa nilai bersih hak umat (Aset Neto) adalah sebesar Rp450.000.000. Untuk memetakan seluruh pos kekayaan ini, Ustadz Mansur menerapkan Bagan Akun digital standardisasi kementerian.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div class="diagram-node accent">1xxx - Aset</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">2xxx - Liabilitas</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">3xxx - Aset Neto</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Aset Neto (Net Assets):</strong> Akumulasi sisa dana titipan umat yang dikuasai yayasan, dikelompokkan menjadi terikat dan tidak terikat.</li>
+                        <li><strong>COA Sederhana:</strong> Bagan standardisasi klasifikasi penulisan akun (contoh: 1xxx untuk Aset, 2xxx untuk Utang, 3xxx untuk Aset Neto, 4xxx untuk Pendapatan, 5xxx untuk Beban).</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Bagan akun COA sederhana organisasi nirlaba yayasan"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Bagan+akun+COA+sederhana+organisasi+nirlaba+yayasan" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Ketik kata singkatan dari Bagan Akun bahasa Inggris <strong>COA</strong> (huruf kapital penuh) di sel A1 pembantu pengidentifikasi sistem.</p>
+                    <div class="task-input-group">
+                        <label for="p7">Ketik singkatan huruf kapital dari bagan akun yang Anda input di sel A1 tersebut:</label>
+                        <input type="text" id="p7" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c6_1" onchange="saveChecklistState()">
+                        <span>Saya memahami susunan nomor kode COA dasar pesantren nirlaba.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 3</h4>
+                    <p>Mengapa dalam persamaan akuntansi pesantren, istilah "Modal" diganti dengan istilah "Aset Neto"?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q7" value="A">
+                            <span>Agar nilai kas pesantren terlihat jauh lebih banyak di depan para donatur.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q7" value="B">
+                            <span>Because pesantren didirikan bukan untuk mencari keuntungan komersial pribadi yang dibagi dalam bentuk saham kepada pendiri.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q7', 'B', 'fb7', 6)">Kirim & Verifikasi</button>
+                    <div id="fb7" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 4 -->
+            <section id="section7" class="section">
+                <h2>Modul 4: Jurnal Penyesuaian (Akrual)</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Prinsip Alokasi Manfaat</span>
+                        <span class="concept-tag">Beban Dibayar di Muka</span>
+                        <span class="concept-tag">Depresiasi Garis Lurus</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Ini adalah bagian yang membutuhkan konsentrasi lebih. Jurnal penyesuaian digunakan untuk mengalokasikan beban secara adil sesuai kurun waktu manfaat. Jika kita membeli sewa gedung asrama untuk satu tahun penuh di muka, kita tidak boleh mencaturnya langsung habis sebagai beban di bulan pertama.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Mengurai Sewa 12 Bulan</h4>
+                    <p>Pada 1 Desember, Ustadz Mansur membayar lunas tunai sewa pemancar internet asrama Rp12.000.000 untuk jangka waktu 1 tahun penuh ke depan. Di akhir bulan 31 Desember, ia tidak boleh mencatat beban internet bulan Desember sebesar Rp12.000.000. Secara akrual, manfaat yang dikonsumsi riil hanyalah untuk 1 bulan (Desember) sebesar Rp1.000.000. Sisa Rp11.000.000 harus dilaporkan aman sebagai aset "Uang Sewa Dibayar di Muka" pada akhir tahun.</p>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-step active">1<span class="timeline-label">Desember (Beban Rp1M)</span></div>
+                    <div class="timeline-step">2<span class="timeline-label">Jan (Sewa Di Muka)</span></div>
+                    <div class="timeline-step">...<span class="timeline-label">dst.</span></div>
+                    <div class="timeline-step">12<span class="timeline-label">November (Sewa Di Muka)</span></div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Beban Dibayar di Muka:</strong> Pencatatan pengeluaran di awal yang dikategorikan sebagai aset lancar, lalu dipotong berkala setiap bulan seiring pemanfaatan jasa.</li>
+                        <li><strong>Penyusutan Komputer/Gedung:</strong> Pembebanan nilai penurunan fungsi fisik barang modal yang disusutkan secara bertahap selama masa pakainya.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-label">1. Jurnal Penyesuaian</span>
+                            <div class="query-meta">
+                                <span class="query-text">"Penjelasan jurnal penyesuaian beban dibayar di muka akrual"</span>
+                                <a class="search-btn" href="https://www.google.com/search?q=Penjelasan+jurnal+penyesuaian+beban+dibayar+di+muka+akrual" target="_blank">Cari Google ➔</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Hitung penyusutan bulanan komputer sekretariat seharga Rp12.000.000 dengan masa manfaat 5 tahun (60 bulan) tanpa nilai sisa. Di sel B1, ketik rumus `=12000000/60` untuk mencari depresiasi per bulannya.</p>
+                    <div class="task-input-group">
+                        <label for="p8">Berapakah beban penyusutan komputer bulanan yang dihasilkan dari rumus tersebut?</label>
+                        <input type="number" id="p8" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c7_1" onchange="saveChecklistState()">
+                        <span>Saya memahami cara kerja penyusutan nilai komputer asrama per bulan.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 4</h4>
+                    <p>Pada 1 Desember, pesantren membayar lunas biaya internet asrama setahun ke depan sebesar Rp12.000.000. Ketika tutup buku bulanan per 31 Desember, berapa nilai asuransi yang diakui sebagai beban resmi bulan Desember?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q8" value="A">
+                            <span>Rp1.000.000 (Didebit sebagai Beban Internet bulan Desember, sisanya Rp11.000.000 masih berupa aset).</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q8" value="B">
+                            <span>Rp12.000.000 langsung diakui habis sebagai beban internet bulan Desember.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q8', 'A', 'fb8', 7)">Kirim & Verifikasi</button>
+                    <div id="fb8" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 5 -->
+            <section id="section8" class="section">
+                <h2>Modul 5: Jurnal Penutup & Neraca Saldo Setelah Penutupan</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Menolkan Akun Nominal</span>
+                        <span class="concept-tag">Akun Riil Permanen</span>
+                        <span class="concept-tag">Tutup Buku</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Ketika tahun ajaran atau periode pembukuan berakhir, kita harus mereset atau mengembalikakan angka pendapatan dan beban ke angka nol. Hal ini dilakukan agar pendapatan tahun lalu tidak bercampur dengan pendapatan tahun berjalan.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Mengosongkan Gelas Pendapatan</h4>
+                    <p>Pada tanggal 31 Desember akhir tahun, pesantren mencatat Pendapatan SPP terkumpul Rp50.000.000 dan Beban Dapur Rp30.000.000. Agar pembukuan awal Januari besok dimulai bersih dari angka nol, Ustadz Mansur menutup (mengosongkan) kedua akun sementara tersebut. Selisih bersih sebesar Rp20.000.000 (Surplus) dipindahkan secara permanen sebagai penambah nilai Aset Neto dalam lembar neraca posisi keuangan.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div class="diagram-node">Pendapatan (Tutup ke Nol)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">Ikhtisar Surplus / Defisit</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">Aset Neto Yayasan (Ditambah)</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Akun Nominal (Sementara):</strong> Seluruh akun pendapatan dan beban wajib ditutup ke nol di akhir tahun dengan memindahkan selisihnya ke akun permanen Aset Neto.</li>
+                        <li><strong>Akun Riil (Permanen):</strong> Akun aset, utang, dan aset neto tidak pernah ditutup ke nol; saldonya dilanjutkan sebagai saldo awal tahun baru.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Mengapa akun nominal pendapatan beban harus ditutup akhir tahun"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Mengapa+akun+nominal+pendapatan+beban+harus+ditutup+akhir+tahun" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Pendapatan tahun berjalan terkumpul Rp50.000.000 (sel D1) dan total beban operasional Rp30.000.000 (sel D2). Hitung surplus neto penutup menggunakan formula `=D1-D2` di sel D3.</p>
+                    <div class="task-input-group">
+                        <label for="p9">Berapakah nilai surplus neto penutupan buku tersebut?</label>
+                        <input type="number" id="p9" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c8_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti bedanya akun sementara (nominal) yang harus nol, dan akun permanen (riil) yang tersisa.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 5</h4>
+                    <p>Akun manakah di bawah ini yang dipastikan TIDAK AKAN memiliki nilai saldo (bersaldo nol) di lembar Neraca Saldo Setelah Penutupan?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q9" value="A">
+                            <span>Pendapatan SPP, Pendapatan Infaq, Beban Konsumsi, dan Beban Listrik.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q9" value="B">
+                            <span>Kas di Brankas, Piutang SPP Santri, Gedung Kantor, dan Aset Neto Terikat.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q9', 'A', 'fb9', 8)">Kirim & Verifikasi</button>
+                    <div id="fb9" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 6 -->
+            <section id="section9" class="section">
+                <h2>Modul 6: Aset Neto & Laporan Aktivitas Yayasan (ISAK 35)</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Aset Neto Terikat</span>
+                        <span class="concept-tag">Laporan Aktivitas</span>
+                        <span class="concept-tag">Pembatasan Donatur</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Pada modul ini, kita masuk ke inti akuntansi nirlaba. Dana sumbangan di pesantren dipilah berdasarkan niat/pembatasan dari donatur. Jika donatur tidak mensyaratkan apa pun, dana dikategorikan sebagai Dana Tanpa Pembatasan (Tidak Terikat).</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Pemilah Dana Masjid</h4>
+                    <p>Haji Salman menyerahkan sumbangan dana sebesar Rp50.000.000 tunai kepada pesantren dengan mandat tertulis: "Khusus untuk membiayai pembelian keramik asrama putri". Ustadz Mansur menyadari ini adalah sumbangan dengan batasan khusus. Maka, dana ini dikelompokkan ke dalam laci "Aset Neto Terikat Temporer". Uang tersebut haram dipakai untuk membayar honor rutin supir bus jemputan sebelum keramik asrama selesai dibangun.</p>
+                </div>
+
+                <div class="visual-diagram" style="flex-direction: column; align-items: stretch;">
+                    <div style="font-weight: bold; text-align: center; margin-bottom: 5px;">Pembagian Struktur Aset Neto</div>
+                    <div style="display: flex; gap: 10px; justify-content: space-around;">
+                        <div class="diagram-node accent" style="width: 45%;">Tanpa Pembatasan <br> (Bebas Dipakai)</div>
+                        <div class="diagram-node" style="width: 45%;">Dengan Pembatasan <br> (Khusus Donatur)</div>
+                    </div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Aset Neto Tidak Terikat (Unrestricted Net Assets):</strong> Uang bebas yang boleh dikelola pesantren untuk kepentingan belanja sayur, membeli sapu, atau pemeliharaan umum.</li>
+                        <li><strong>Aset Neto Terikat (Restricted Net Assets):</strong> Dana yang wajib dialokasikan sesuai mandat donatur (misalnya sumbangan pembangunan asrama putri tidak boleh dipakai membeli mobil pribadi operasional).</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Penerapan klasifikasi aset neto terikat tidak terikat ISAK 35"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Penerapan+klasifikasi+aset+neto+terikat+tidak+terikat+ISAK+35" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Ketik frasa tanpa spasi: <strong>TIDAKTERIKAT</strong> (huruf kapital penuh) di sel A1 pembantu guna membiasakan pemetaan jenis penggolongan dana bebas.</p>
+                    <div class="task-input-group">
+                        <label for="p10">Ketik kata penggolongan kapital tanpa spasi tersebut:</label>
+                        <input type="text" id="p10" class="practical-input" placeholder="Ketik kata di sini..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c9_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti mengapa dana sumbangan harus dipilah berdasarkan pembatasan donatur.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 6</h4>
+                    <p>Laporan apa dalam standar akuntansi pesantren nirlaba yang berfungsi menggantikan Laporan Laba Rugi komersial?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q10" value="A">
+                            <span>Laporan Aktivitas (menyajikan Surplus atau Defisit berjalan berdasarkan batasan donatur).</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q10" value="B">
+                            <span>Laporan Penjualan Saham Tahunan Pengurus Yayasan.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q10', 'A', 'fb10', 9)">Kirim & Verifikasi</button>
+                    <div id="fb10" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 7 -->
+            <section id="section10" class="section">
+                <h2>Modul 7: Dana Wakaf, Infaq, Shodaqoh, dan Zakat</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">PSAK 109 Zakat</span>
+                        <span class="concept-tag">Nazhir Wakaf</span>
+                        <span class="concept-tag">Rekening Terpisah Syariah</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Pesantren dipercaya mengelola dana amanah syariah: Zakat, Infaq, Sedekah (ZIS), dan Wakaf. Pencatatan dana-dana ini diatur secara khusus dalam PSAK 109 agar tidak tercampur dengan dana operasional rutin yayasan.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Brankas Zakat Terpisah</h4>
+                    <p>Wali santri menyetor Zakat Maal sebesar Rp20.000.000 tunai untuk disalurkan kepada kaum dhuafa melalui yayasan amil pesantren. Di hari yang sama, bendahara juga menerima Infaq bebas pembangunan Rp10.000.000. Ustadz Mansur langsung memisahkan penyimpanan fisiknya: Zakat disetor ke rekening Bank Syariah Mandiri khusus amil zakat (terikat syariat 8 asnaf), sedangkan Infaq masuk ke rekening operasional utama pesantren.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div style="width: 45%; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px;">
+                        <strong>Dana ZAKAT</strong> <br> ➔ Rekening Khusus <br> ➔ Penyaluran 8 Asnaf
+                    </div>
+                    <div style="font-size: 1.5rem;">⚖️</div>
+                    <div style="width: 45%; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px;">
+                        <strong>Dana OPERASIONAL</strong> <br> ➔ Rekening Yayasan <br> ➔ Belanja Rutin Pondok
+                    </div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Zakat (PSAK 109):</strong> Dana titipan umat yang wajib disalurkan secepatnya kepada yang berhak (asnaf), di mana amil hanya berhak mengelola porsi amil yang diizinkan syariat.</li>
+                        <li><strong>Wakaf Uang / Aset:</strong> Aset abadi yang nilainya harus dijaga utuh secara permanen. Hanya hasil kelolanya yang boleh dibelanjakan untuk kesejahteraan santri.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Penerapan PSAK 109 akuntansi zakat infaq sedekah pesantren"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Penerapan+PSAK+109+akuntansi+zakat+infaq+sedekah+pesantren" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Hitung jumlah penerimaan kas syariah terkonsolidasi dari dana Zakat Rp20.000.000 (sel B1) dan dana Infaq Rp10.000.000 (sel B2) menggunakan rumus `=B1+B2`.</p>
+                    <div class="task-input-group">
+                        <label for="p11">Berapakah total penerimaan terkonsolidasi tersebut?</label>
+                        <input type="number" id="p11" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c10_1" onchange="saveChecklistState()">
+                        <span>Saya memahami aturan keharusan memisahkan fisik kas zakat dan wakaf dari kas yayasan.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 7</h4>
+                    <p>Wali santri menyetor zakat maal tunai ke kasir pesantren sebesar Rp10.000.000. Apakah dana zakat tersebut boleh dipakai bendahara untuk menambal kekurangan biaya belanja beras di dapur umum pesantren?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q11" value="A">
+                            <span>Boleh, selama status pesantren tersebut kekurangan dana dan diniatkan untuk ibadah santri.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q11" value="B">
+                            <span>Tidak boleh. Zakat merupakan dana terikat syariat yang hanya boleh disalurkan ke 8 golongan asnaf penerima manfaat.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q11', 'B', 'fb11', 10)">Kirim & Verifikasi</button>
+                    <div id="fb11" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 8 -->
+            <section id="section11" class="section">
+                <h2>Modul 8: Piutang SPP Santri & Kebijakan Keringanan</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Subsidi Silang</span>
+                        <span class="concept-tag">Pencatatan Beban Beasiswa</span>
+                        <span class="concept-tag">Kartu Kendali Piutang</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Pesantren memiliki misi sosial keagamaan. Ketika ada santri yatim atau dhuafa yang tidak mampu membayar SPP/syahriah penuh, akuntan menggunakan kartu kendali piutang dan pencatatan subsidi silang yang rapi.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Membantu Santri Yatim</h4>
+                    <p>Santri Fauzan adalah yatim dhuafa yang berhak mendapatkan keringanan SPP gratis penuh senilai Rp300.000. Untuk mencatat ini, Ustadz Mansur tidak langsung membuang tagihan Fauzan begitu saja. Ia menjurnal: mendebit "Beban Subsidi Beasiswa Sosial" Rp300.000 dan mengkredit akun "Piutang SPP" Rp300.000. Catatan ini membuktikan kontribusi nyata sumbangsih subsidi sosial pesantren di hadapan komite donatur eksternal.</p>
+                </div>
+
+                <div class="visual-diagram" style="flex-direction: column;">
+                    <div style="font-weight: bold; margin-bottom: 5px;">Aliran Jurnal Subsidi Beasiswa</div>
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <div class="diagram-node" style="width: 48%;">Debit: Beban Beasiswa <br> (Merekam Kebaikan Sosial)</div>
+                        <div class="diagram-arrow">➔</div>
+                        <div class="diagram-node accent" style="width: 48%;">Kredit: Piutang SPP <br> (Mengurangi Beban Santri)</div>
+                    </div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Pembebasan SPP:</strong> Pembebasan SPP santri kurang mampu tidak langsung dihapus tanpa catatan, melainkan didebit sebagai Beban Beasiswa Sosial agar pengorbanan sosial pesantren terlihat jelas di laporan aktivitas.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Pencatatan piutang syahriah beasiswa internal yayasan pesantren"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Pencatatan+piutang+syahriah+beasiswa+internal+yayasan+pesantren" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Nilai tunggakan SPP kotor santri bulan berjalan terkumpul Rp30.000.000 (sel B1). Nilai pembebasan beasiswa yatim disepakati Rp10.000.000 (sel B2). Hitung sisa piutang bersih tertagih menggunakan rumus `=B1-B2`.</p>
+                    <div class="task-input-group">
+                        <label for="p12">Berapakah sisa piutang bersih tertagih tersebut?</label>
+                        <input type="number" id="p12" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c11_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti cara mencatat subsidi beasiswa yatim sebagai pengurang piutang melalui akun beban sosial.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 8</h4>
+                    <p>Mengapa subsidi pembebasan SPP yatim senilai Rp500.000 harus didebit ke akun Beban Beasiswa Sosial, bukan langsung dihapus tanpa jurnal?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q12" value="A">
+                            <span>Agar nilai pengabdian sosial dan sumbangsih beasiswa pesantren terekam jelas secara kuantitatif dalam laporan aktivitas akhir tahun.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q12" value="B">
+                            <span>Agar wali santri yang bersangkutan merasa berutang budi secara materiil kepada pengurus yayasan.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q12', 'A', 'fb12', 11)">Kirim & Verifikasi</button>
+                    <div id="fb12" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 9 -->
+            <section id="section12" class="section">
+                <h2>Modul 9: Akuntansi Perusahaan Dagang — Koperasi/Kantin Santri</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Pencatatan Persediaan</span>
+                        <span class="concept-tag">Harga Pokok Penjualan (HPP)</span>
+                        <span class="concept-tag">Pemisahan Keuangan Unit Usaha</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Koperasi dan kantin santri di lingkungan pesantren beroperasi seperti unit bisnis komersial. Di sini, kita harus memisahkan pencatatan keuangan unit usaha ini dari pembukuan yayasan nirlaba agar tidak mengaburkan perhitungan pajak atau pengelolaan dana asrama.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Laba Koperasi ATK</h4>
+                    <p>Koperasi "Berkah Santri" kulakan pulpen bermerek dengan harga perolehan asli Rp3.000 per biji (HPP), lalu dipajang di etalase koperasi untuk dijual kepada santri seharga Rp5.000 tunai (Harga Jual). Agar tidak mencampuradukkan kas umum yayasan, Ustadz Mansur memisah pembukuan koperasi: laba kotor sebesar Rp2.000 dicatat resmi di bawah laporan mutasi niaga koperasi, bukan langsung masuk sebagai sumbangan operasional umum.</p>
+                </div>
+
+                <table class="visual-table">
+                    <thead>
+                        <tr>
+                            <th>Aktivitas Niaga</th>
+                            <th>Nilai Nominal</th>
+                            <th>Akun Rujukan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Harga Jual Pulpen ke Santri</td>
+                            <td>Rp5.000</td>
+                            <td>Pendapatan Penjualan</td>
+                        </tr>
+                        <tr>
+                            <td>Modal Pembelian (Kulakan)</td>
+                            <td>Rp3.000</td>
+                            <td>Harga Pokok Penjualan (HPP)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Selisih Laba Bersih</strong></td>
+                            <td><strong>Rp2.000</strong></td>
+                            <td><strong>Laba Bersih Koperasi</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>HPP (Harga Pokok Penjualan):</strong> Harga perolehan asli modal pembelian barang dagangan yang terjual selama periode berjalan.</li>
+                        <li><strong>Pencatatan Persediaan:</strong> Pengendalian stok fisik perlengkapan tulis atau sembako koperasi secara tertib.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Menghitung harga pokok penjualan koperasi santri dagang"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Menghitung+harga+pokok+penjualan+koperasi+santri+dagang" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Nilai pembelian bersih barang dagangan sembako adalah Rp15.000.000 (sel B1) dan nilai barang yang masih tersisa fisik di rak adalah Rp3.000.000 (sel B2). Tulis rumus `=B1-B2` di sel B3 untuk mencari nilai HPP.</p>
+                    <div class="task-input-group">
+                        <label for="p13">Berapakah HPP barang sembako yang terjual tersebut?</label>
+                        <input type="number" id="p13" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c12_1_sub" onchange="saveChecklistState()">
+                        <span>Saya memahami cara memisahkan pencatatan unit bisnis koperasi dagang dari dana sosial pesantren.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 9</h4>
+                    <p>Mengapa pembukuan unit usaha seperti koperasi santri di pesantren harus diselenggarakan terpisah dari pembukuan utama yayasan pesantren?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q13" value="A">
+                            <span>Sengaja untuk mempersulit laporan keuangan yayasan saat diperiksa oleh aparat pemerintah.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q13" value="B">
+                            <span>Karena koperasi beroperasi mencari keuntungan murni (profit-oriented) yang membutuhkan perhitungan HPP dan pajak dagang yang berbeda dari prinsip nirlaba yayasan.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q13', 'B', 'fb13', 12)">Kirim & Verifikasi</button>
+                    <div id="fb13" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 10 -->
+            <section id="section13" class="section">
+                <h2>Modul 10: Kas Kecil, Pengendalian Internal & Rekonsiliasi Bank Syariah</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Kas Kecil Dapur</span>
+                        <span class="concept-tag">Otorisasi Bendahara</span>
+                        <span class="concept-tag">Bagi Hasil Mudharabah</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Kas kecil digunakan untuk membiayai pengeluaran kecil harian seperti sayuran segar di dapur umum atau obat santri sakit. Sementara itu, dana besar disimpan di Bank Syariah yang bagi hasil bulanannya wajib disesuaikan secara tertib.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Laci Darurat Dapur Asrama</h4>
+                    <p>Setiap pagi, asisten dapur umum butuh membelanjakan Rp50.000 tunai untuk membeli garam, cabai, atau es batu darurat. Tidak efisien jika asisten asrama harus meminta otorisasi tanda tangan Kyai setiap pagi. Maka, Ustadz Mansur membentuk laci "Kas Kecil Dana Tetap" Rp2.000.000 di dapur. Di akhir bulan, ia menguji seluruh total nota belanja dan mengganti sisa uang agar saldo kembali utuh seperti semula.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div class="diagram-node">Laci Kas Kecil (Rp2M)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">Belanja Harian (Garam/Obat)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">Koleksi Nota ➔ Pengisian Kembali Kas</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Kas Kecil Imprest (Dana Tetap):</strong> Kasir kecil asrama memegang nominal dana tetap yang diisi kembali sebesar nilai kuitansi belanja riil yang terkumpul.</li>
+                        <li><strong>Rekonsiliasi Bank Syariah:</strong> Menyeimbangkan nilai kas di buku dengan nilai di rekening koran bank syariah (termasuk mencatat bagi hasil tabungan).</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Pengelolaan kas kecil metode imprest dapur asrama"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Pengelolaan+kas+kecil+metode+imprest+dapur+asrama" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Kas kecil asrama dibentuk Rp2.000.000 (sel B1) and terkumpul belanja kuitansi darurat dapur Rp1.200.000 (sel B2). Tulis rumus `=B1-B2` di sel B3 untuk mencari sisa saldo kas tunai fisik saat ini.</p>
+                    <div class="task-input-group">
+                        <label for="p14">Berapakah sisa kas tunai fisik kas kecil yang dipegang kasir tersebut?</label>
+                        <input type="number" id="p14" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c13_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti cara mencatat mutasi kas kecil serta rekonsiliasi bagi hasil dari bank syariah.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 10</h4>
+                    <p>Bagaimana perlakuan pencatatan jurnal atas penerimaan pendapatan bagi hasil mudharabah dari rekening Bank Syariah pesantren?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q14" value="A">
+                            <span>Debit: Kas di Bank | Kredit: Pendapatan Bagi Hasil Mudharabah.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q14" value="B">
+                            <span>Debit: Beban Administrasi Bank | Kredit: Pendapatan Zakat.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q14', 'A', 'fb14', 13)">Kirim & Verifikasi</button>
+                    <div id="fb14" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 11 -->
+            <section id="section14" class="section">
+                <h2>Modul 11: Jurnal Koreksi Kesalahan Pembukuan</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Correcting Entries</span>
+                        <span class="concept-tag">Reverse Jurnal</span>
+                        <span class="concept-tag">Pembersihan Jejak Audit</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Manusia tidak luput dari kesalahan. Akuntan profesional tidak pernah menggunakan penghapus kertas atau tipe-x untuk membetulkan catatan yang keliru di buku besar resmi. Kesalahan dibetulkan dengan membuat <strong>jurnal koreksi</strong> yang elegan.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Salah Pilih Laci Catatan</h4>
+                    <p>Seorang staf magang membelanjakan kas Rp5.000.000 tunai untuk membeli kulkas penyimpanan bahan pangan dapur asrama. Namun, ia terlanjur mencatatnya ke dalam akun "Beban Perlengkapan Kantor". Alih-alih menghapusnya kasar menggunakan cairan pemutih, Ustadz Mansur membetulkannya lewat Jurnal Koreksi: memindahkan nilai Rp5.000.000 ke Debit Peralatan Dapur, dan mengeliminasi Beban Perlengkapan Kantor yang salah di Kredit.</p>
+                </div>
+
+                <div class="visual-diagram">
+                    <div style="border: 1px solid var(--error); padding: 5px; border-radius: 4px;">Salah: Beban Kantor (Debit)</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">Jurnal Koreksi</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div style="border: 1px solid var(--success); padding: 5px; border-radius: 4px;">Benar: Peralatan Dapur (Debit)</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Jurnal Koreksi:</strong> Jurnal penyeimbang taktis yang meniadakan dampak kesalahan klasifikasi nama akun atau salah angka nominal secara profesional tanpa merusak histori pencatatan.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-label">1. Jurnal Koreksi</span>
+                            <div class="query-meta">
+                                <span class="query-text">"Cara menyusun jurnal koreksi kesalahan klasifikasi akun akuntansi"</span>
+                                <a class="search-btn" href="https://www.google.com/search?q=Cara+menyusun+jurnal+koreksi+kesalahan+klasifikasi+akun+akuntansi" target="_blank">Cari Google ➔</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Anda salah mencatut pembelian perlengkapan Rp10.000.000 menjadi hanya Rp1.000.000 di jurnal. Hitung nilai selisih yang harus ditambahkan menggunakan rumus `=10000000-1000000` di sel B1.</p>
+                    <div class="task-input-group">
+                        <label for="p15">Berapakah nilai selisih koreksi angka yang harus ditambahkan di sel B1?</label>
+                        <input type="number" id="p15" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c14_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti cara menyusun jurnal koreksi kesalahan tanpa menggunakan tip-ex di buku besar.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 11</h4>
+                    <p>Anda tidak sengaja menjurnal pembelian panci stainless dapur asrama sebesar Rp5.000.000 tunai ke dalam akun "Beban Perlengkapan Kantor". Bagaimana cara mengoreksinya?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q15" value="A">
+                            <span>Mencoret paksa barisan buku besar lama menggunakan tinta merah lalu menuliskan akun baru di atasnya.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q15" value="B">
+                            <span>Membuat jurnal koreksi: Debit Peralatan Dapur Rp5.000.000 dan Kredit Perlengkapan Kantor Rp5.000.000 untuk menetralisir klasifikasi akun yang keliru.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q15', 'B', 'fb15', 14)">Kirim & Verifikasi</button>
+                    <div id="fb15" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 12 -->
+            <section id="section15" class="section">
+                <h2>Modul 12: Laporan Pertanggungjawaban & Analisis Sederhana</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Pertanggungjawaban Donatur</span>
+                        <span class="concept-tag">Rasio Efisiensi Sederhana</span>
+                        <span class="concept-tag">Transparansi Publik</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Setelah seluruh laporan selesai disusun, akuntan pesantren harus mampu menceritakan kembali posisi keuangan tersebut kepada pihak awam seperti donatur, komite sekolah, atau wali santri dengan cara yang sangat sederhana.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Laporan Wali Santri</h4>
+                    <p>Wali santri bertanya pada rapat pleno tahunan: "Kemanakah aliran uang syahriah bulanan anak kami disalurkan?" Ustadz Mansur maju menyajikan Laporan Ringkas: Rasio Efisiensi Program pesantren adalah 80%. Artinya, dari setiap Rp100.000 iuran yang dikumpulkan, Rp80.000 tersalurkan murni langsung untuk membeli gizi piring asrama santri dan honor operasional ustadz, sementara Rp20.000 sisanya menopang biaya administrasi kantor yayasan.</p>
+                </div>
+
+                <div class="visual-diagram" style="flex-direction: column; align-items: stretch;">
+                    <div style="font-weight: bold; text-align: center; margin-bottom: 5px;">Efisiensi Alokasi Program (80%)</div>
+                    <div style="background-color: #cbd5e1; border-radius: 8px; overflow: hidden; height: 24px; position: relative;">
+                        <div style="background-color: var(--success); width: 80%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: bold;">
+                            80% Kemanfaatan Santri
+                        </div>
+                    </div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Program Efficiency Ratio:</strong> Mengukur porsi pengeluaran langsung untuk kesejahteraan dan kegiatan santri dibandingkan dengan total seluruh pengeluaran bulanan yayasan.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Cara menyusun laporan keuangan transparan donatur nirlaba"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Cara+menyusun+laporan+keuangan+transparan+donatur+nirlaba" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Anggaran langsung makan & mendidik santri terkumpul Rp80.000.000 (sel B1) dari total pengeluaran bruto bulanan Rp100.000.000 (sel B2). Tulis rumus pembagian `=B1/B2` di sel B3 untuk mencari nilai rasio efisiensi program.</p>
+                    <div class="task-input-group">
+                        <label for="p16">Berapakah rasio efisiensi program (desimal) yang dihasilkan di sel B3?</label>
+                        <input type="number" step="0.1" id="p16" class="practical-input" placeholder="Contoh: 0.8" oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c15_1" onchange="saveChecklistState()">
+                        <span>Saya mengerti cara membaca rasio efisiensi nirlaba dasar demi transparansi laporan donatur.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 12</h4>
+                    <p>Apa arti bagi donatur umum jika laporan keuangan pesantren menunjukkan tingkat "Rasio Efisiensi Program" yang sangat tinggi (misal 85%)?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q16" value="A">
+                            <span>Artinya sebagian besar dana sumbangan tersalurkan langsung untuk mendanai pengajaran dan gizi santri, bukan habis dimakan biaya admin pengurus.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q16" value="B">
+                            <span>Artinya pesantren tersebut mengalami defisit keuangan dan akan segera bangkrut.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q16', 'A', 'fb16', 15)">Kirim & Verifikasi</button>
+                    <div id="fb16" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- MODUL 13 -->
+            <section id="section16" class="section">
+                <h2>Modul 13: Capstone Project — Siklus Akuntansi Pesantren Setahun Penuh</h2>
+                <div class="key-concepts-box">
+                    <h4>🔑 Konsep Kunci:</h4>
+                    <div class="concept-tags">
+                        <span class="concept-tag">Siklus Utuh Nirlaba</span>
+                        <span class="concept-tag">Penyusunan Neraca Lajur</span>
+                        <span class="concept-tag">CALK Komprehensif</span>
+                    </div>
+                </div>
+                <div class="overview-box">
+                    <h3>💡 Gambaran Umum (Overview)</h3>
+                    <p>Ini adalah ujian akhir puncak Anda. Anda diminta untuk mengintegrasikan seluruh keahlian yang telah Anda kuasai mulai dari Modul 0.1 hingga Modul 12 ke dalam satu studi kasus fiktif keuangan pesantren selama satu tahun buku penuh.</p>
+                </div>
+
+                <div class="case-box">
+                    <h4>📙 Kasus Nyata: Tutup Buku Darul Amanah</h4>
+                    <p>Kini satu tahun telah berlalu penuh. Ustadz Mansur duduk tenang menghadap komputer. Menggunakan neraca lajur spreadsheet yang tersusun rapi, ia meninjau kembali kuitansi pendaftaran santri baru, pengakuan sisa nilai sewa, depresiasi komputer kantor, mutasi kas kecil dapur, hingga sisa alokasi dana amil zakat asnaf. Di bawah asuhan Kyai Hasyim, ia menyusun draf Laporan Keuangan formal ISAK 35 yang kredibel dan siap disajikan kepada segenap donatur setia pesantren.</p>
+                </div>
+
+                <div class="visual-diagram" style="justify-content: space-around;">
+                    <div class="diagram-node">1. Bukti Kuitansi</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">2. Jurnal Buku Besar</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node accent">3. Neraca Lajur</div>
+                    <div class="diagram-arrow">➔</div>
+                    <div class="diagram-node">4. Laporan ISAK 35</div>
+                </div>
+
+                <div class="essence-box">
+                    <h3>📖 Esensi Teoretis Konsep Kunci</h3>
+                    <ul>
+                        <li><strong>Integrasi Siklus:</strong> Menyelesaikan lembar neraca lajur besar, menjurnal penyesuaian penyusutan gedung, rekonsiliasi bank, pemisahan saldo dana ZIS terikat, penutupan tahunan, hingga pengungkapan formal CALK.</li>
+                    </ul>
+                </div>
+                <div class="search-guidance">
+                    <h4>🔍 Sumber Riset Mandiri:</h4>
+                    <ul class="query-list">
+                        <li class="query-item">
+                            <span class="query-text">"Siklus akuntansi lengkap pesantren nirlaba excel"</span>
+                            <a class="search-btn" href="https://www.google.com/search?q=Siklus+akuntansi+lengkap+pesantren+nirlaba+excel" target="_blank">Cari Google ➔</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="practical-task-box">
+                    <h4>📊 Tugas Praktik Mandiri (Excel / Google Sheets)</h4>
+                    <p>Buka spreadsheet Anda. Hitung sisa total Aset Neto Tanpa Pembatasan donatur jika saldo awal tahun adalah Rp500.000.000 (sel B1) dan surplus tahun ini adalah Rp120.000.000 (sel B2) menggunakan rumus `=B1+B2`.</p>
+                    <div class="task-input-group">
+                        <label for="p17">Berapakah saldo akumulasi Aset Neto penutup di sel B3 tersebut?</label>
+                        <input type="number" id="p17" class="practical-input" placeholder="Masukkan angka..." oninput="saveChecklistState()">
+                    </div>
+                </div>
+                <div class="checklist-box">
+                    <h4>📋 Ceklis Pemahaman:</h4>
+                    <label class="check-item">
+                        <input type="checkbox" id="c16_1" onchange="saveChecklistState()">
+                        <span>Saya telah menyelesaikan seluruh modul dasar dan siap menutup pembukuan akhir tahun komprehensif.</span>
+                    </label>
+                </div>
+                <div class="verification-box">
+                    <h4>🔒 Tantangan Kelulusan Modul 13</h4>
+                    <p>Apa tujuan akhir paling esensial dari kesuksesan menyajikan paket lengkap Laporan Keuangan berbasis standar nirlaba ISAK 35 di pesantren modern?</p>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="q17" value="A">
+                            <span>Memaksimalkan penarikan dividen keuntungan tahunan bagi pendiri atau pengurus yayasan.</span>
+                        </label>
+                        <br>
+                        <label class="option-label">
+                            <input type="radio" name="q17" value="B">
+                            <span>Mewujudkan tata kelola keuangan amanah yang transparan, kredibel, dan siap diaudit demi memenangkan rida Allah SWT serta loyalitas kepercayaan donatur publik.</span>
+                        </label>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1rem;" onclick="verifyAnswer('q17', 'B', 'fb17', 16)">Kirim & Verifikasi</button>
+                    <div id="fb17" class="feedback"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Pengantar Kurikulum Akuntan Pesantren Modern. Didesain secara mandiri mengikuti standar metodologi MOOC aktif.</p>
+    </footer>
+
+    <script>
+        // Track states of verified answers and checkboxes
+        let answersState = { q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null, q8: null, q9: null, q10: null, q11: null, q12: null, q13: null, q14: null, q15: null, q16: null, q17: null };
+        let checklistState = {};
+        let practicalInputsState = { p1: "", p2: "", p3: "", p4: "", p5: "", p6: "", p7: "", p8: "", p9: "", p10: "", p11: "", p12: "", p13: "", p14: "", p15: "", p16: "", p17: "" };
+
+        // Detailed Feedback Library
+        const feedbackLibrary = {
+            q1: {
+                correct: "Sangat Tepat! Yayasan nirlaba didirikan demi kemaslahatan visi sosial keagamaan dan wajib mempertanggungjawabkan pengelolaan amanah dana publik kepada donatur/masyarakat secara terbuka.",
+                incorrect: "Kurang tepat. Yayasan nirlaba tetap menggunakan prinsip hitungan matematika keuangan yang presisi sama seperti perusahaan umum, perbedaannya murni terletak pada visi tujuan akhirnya."
+            },
+            q2: {
+                correct: "Luar Biasa! Bukti kas keluar internal (SPPR) menjamin pengeluaran belanja riil non-kuitansi tetap tercatat secara jujur dan memiliki legitimasi akuntansi yang kuat.",
+                incorrect: "Kurang tepat. Menghapus pencatatan pengeluaran atau mengabaikannya akan membuat laporan kas menjadi tidak seimbang dan merusak akurasi rekonsiliasi fisik brankas."
+            },
+            q3: {
+                correct: "Sangat Tepat! Karena komputer berumur panjang melampaui kurun waktu satu tahun buku dan memberi kemudahan operasional jangka panjang, maka secara standar akuntansi wajib dikelompokkan sebagai Aset Tetap.",
+                incorrect: "Kurang tepat. Pengeluaran kas tunai untuk membeli barang inventaris berumur panjang tidak boleh langsung dibebankan habis di bulan pertama agar tidak mengacaukan analisis efisiensi bulanan."
+            },
+            q4: {
+                correct: "Tepat sekali! Ingat selalu bahwa Debit hanyalah nama kolom penulisan sebelah Kiri, dan Kredit hanyalah nama kolom penulisan sebelah Kanan. Tidak ada arti bertambah/berkurang mutlak tanpa merujuk ke jenis akunnya.",
+                incorrect: "Kurang tepat. Ini adalah kesalahpahaman umum pemula. Debit tidak selalu berarti uang bertambah di bank (bergantung pada perspektif jenis akun rujukan saldo normalnya)."
+            },
+            q5: {
+                correct: "Sempurna! Berdasarkan tabel aturan saldo normal pertambahan akun: Uang Kas (Aset) bertambah di sisi Debit (Kiri) Rp5.000.000, dan Pendapatan Infaq bertambah di sisi Kredit (Kanan) Rp5.000.000.",
+                incorrect: "Kurang tepat. Perhatikan arah penempatan debit-kredit saldo normal Anda. Aset bertambah di posisi Debit (Kiri), bukan Kredit."
+            },
+            q6: {
+                correct: "Luar Biasa! Posting ke buku besar berfungsi mengelompokkan riwayat pencatatan agar kita memperoleh kejelasan mutasi saldo sisa riil per klasifikasi akun secara tertib.",
+                incorrect: "Kurang tepat. Urusan pengamanan kas kecil dari pencurian merupakan ranah kebijakan internal control fisik brankas, bukan fungsi murni ledger posting."
+            },
+            q7: {
+                correct: "Tepat sekali! Yayasan nirlaba didirikan sebagai entitas sosial yang dilarang membagikan sisa sisa dividen kepada pengurus atau pendiri layaknya perseroan komersial.",
+                incorrect: "Kurang tepat. Pergantian nama akun murni merujuk pada pematuhan regulasi hukum nirlaba daerah dan tidak ada kaitannya dengan manipulasi jumlah kas."
+            },
+            q8: {
+                correct: "Sangat Tepat! Berdasarkan garis waktu pemakaian, beban yang habis terpakai selama bulan Desember barulah sebesar 1/12 x Rp12.000.000 = Rp1.000.000. Jurnal penyesuaian ini menjamin pengakuan beban yang adil.",
+                incorrect: "Kurang tepat. Jika langsung diakui habis Rp12.000.000 di bulan Desember, maka pembukuan bulan Januari hingga November tahun depan akan terlihat gratis tanpa beban, hal ini melanggar asas akrual."
+            },
+            q9: {
+                correct: "Sempurna! Seluruh akun nominal (sementara) yang menyajikan pendapatan dan beban harus di-reset kembali menjadi nol pasca-proses penutupan buku agar tidak bercampur ke periode tahun buku baru.",
+                incorrect: "Kurang tepat. Akun-akun riil berposisi permanen (aset, piutang, gedung, dana terikat) saldonya dilanjutkan terus melintasi tahun buku baru tanpa dinolkan."
+            },
+            q10: {
+                correct: "Sangat Tepat! Laporan Aktivitas menyajikan ikhtisar pendapatan, beban, serta surplus atau defisit neto yayasan nirlaba berdasarkan batasan donatur penentu.",
+                incorrect: "Kurang tepat. Yayasan dilarang memiliki kepemilikan saham komersial pribadi yang ditransaksikan publik."
+            },
+            q11: {
+                correct: "Sangat Tepat! Dana zakat maal terikat syariat mutlak dan tidak boleh dipakai untuk menutup beban dapur asrama umum kecuali disalurkan langsung kepada santri penerima manfaat kriteria asnaf fakir miskin.",
+                incorrect: "Kurang tepat. Niat baik atau kondisi kekurangan tidak melegitimasi pelanggaran syariat penggunaan dana titipan zakat secara akuntansi syariah."
+            },
+            q12: {
+                correct: "Luar Biasa! Jurnal Debit Beban Beasiswa Sosial dan Kredit Piutang SPP menampakkan kontribusi sosial riil yang dikerjakan oleh yayasan pesantren kepada para donatur pembantu.",
+                incorrect: "Kurang tepat. Menghapus piutang tanpa catatan jurnal akan membuat kontribusi nilai sumbangsih bantuan beasiswa sosial pesantren menjadi tidak terekam dalam audit keuangan."
+            },
+            q13: {
+                correct: "Sempurna! Unit dagang komersial seperti koperasi santri berorientasi mencari keuntungan riil yang harus dihitung HPP-nya secara terpisah dari keuangan sosial murni nirlaba milik yayasan.",
+                incorrect: "Kurang tepat. Pemisahan diselenggarakan murni demi kenyamanan pelaporan pajak dagang serta analisis kinerja usaha internal pengurus."
+            },
+            q14: {
+                correct: "Sangat Tepat! Penerimaan bagi hasil meningkatkan nilai saldo kas tabungan bank kita di sisi Debit, dan diakui sebagai peningkatan pendapatan bagi hasil mudharabah di sisi Kredit.",
+                incorrect: "Kurang tepat. Bagi hasil dari bank merupakan pendapatan kas masuk bagi pesantren, bukan komponen beban administrasi keluar."
+            },
+            q15: {
+                correct: "Luar Biasa! Selisih kurang catat Rp9.000.000 wajib ditambahkan melalui jurnal penyesuaian koreksi baru agar nilai pembukuan kembali normal sesuai fakta kuitansi riil.",
+                incorrect: "Kurang tepat. Mencoret paksa dilarang karena merusak kerapian jejak audit buku besar resmi."
+            },
+            q16: {
+                correct: "Sempurna! Nilai rasio efisiensi program yang tinggi menunjukkan bahwa dana sumbangan dikelola dengan jujur langsung terserap ke program kemanfaatan santri, bukan menguap habis untuk operasional dinas pengurus.",
+                incorrect: "Kurang tepat. Rasio efisiensi program tidak mengindikasikan status kebangkrutan likuiditas kas melainkan mengukur kualitas kemanfaatan alokasi pengeluaran."
+            },
+            q17: {
+                correct: "Sempurna! Tujuan akhir dari akuntansi pesantren nirlaba bukanlah mencari keuntungan dividen melainkan menegakkan transparansi serta akuntabilitas syiar umat yang kredibel demi meraih rida Allah SWT.",
+                incorrect: "Kurang tepat. Pesantren dilarang menyalurkan sisa sisa surplus sebagai dividen komersial pribadi bagi para pengurus yayasan."
+            }
+        };
+
+        window.onload = function() {
+            loadSavedProgress();
+            updateGlobalUI();
+        };
+
+        function toggleSidebar(isOpen) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (isOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('show');
+            }
+        }
+
+        function showSection(index) {
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.nav-link');
+
+            sections.forEach((sec, idx) => {
+                sec.classList.toggle('active', idx === index);
+            });
+
+            buttons.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === index);
+            });
+
+            toggleSidebar(false);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function verifyAnswer(questionKey, correctValue, feedbackId, moduleIndex) {
+            const selected = document.querySelector(`input[name="${questionKey}"]:checked`);
+            const feedbackDiv = document.getElementById(feedbackId);
+
+            if (!selected) {
+                feedbackDiv.className = "feedback incorrect";
+                feedbackDiv.innerHTML = "Harap pilih salah satu jawaban terlebih dahulu.";
+                feedbackDiv.style.display = "block";
+                return;
+            }
+
+            const isCorrect = selected.value === correctValue;
+            answersState[questionKey] = isCorrect;
+
+            if (isCorrect) {
+                feedbackDiv.className = "feedback correct";
+                feedbackDiv.innerHTML = feedbackLibrary[questionKey].correct;
+            } else {
+                feedbackDiv.className = "feedback incorrect";
+                feedbackDiv.innerHTML = feedbackLibrary[questionKey].incorrect;
+            }
+            feedbackDiv.style.display = "block";
+
+            saveToLocalStorage();
+            updateGlobalUI();
+        }
+
+        function saveChecklistState() {
+            // Checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(chk => {
+                checklistState[chk.id] = chk.checked;
+            });
+
+            // Practical Inputs
+            for (let i = 1; i <= 17; i++) {
+                const el = document.getElementById(`p${i}`);
+                if (el) {
+                    practicalInputsState[`p${i}`] = el.value.trim();
+                }
+            }
+
+            saveToLocalStorage();
+            updateGlobalUI();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('pesantren_v2_answersState', JSON.stringify(answersState));
+            localStorage.setItem('pesantren_v2_checklistState', JSON.stringify(checklistState));
+            localStorage.setItem('pesantren_v2_practicalInputsState', JSON.stringify(practicalInputsState));
+        }
+
+        function loadSavedProgress() {
+            const savedAnswers = localStorage.getItem('pesantren_v2_answersState');
+            const savedChecklist = localStorage.getItem('pesantren_v2_checklistState');
+            const savedPractical = localStorage.getItem('pesantren_v2_practicalInputsState');
+
+            if (savedAnswers) {
+                answersState = JSON.parse(savedAnswers);
+                Object.keys(answersState).forEach(key => {
+                    const isCorrect = answersState[key];
+                    if (isCorrect !== null) {
+                        const correctVal = getCorrectValue(key);
+                        const radioVal = isCorrect ? correctVal : getIncorrectValuePlaceholder(key, correctVal);
+                        const input = document.querySelector(`input[name="${key}"][value="${radioVal}"]`);
+                        if (input) input.checked = true;
+                    }
+                });
+            }
+
+            if (savedChecklist) {
+                checklistState = JSON.parse(savedChecklist);
+                Object.keys(checklistState).forEach(id => {
+                    const chk = document.getElementById(id);
+                    if (chk) chk.checked = checklistState[id];
+                });
+            }
+
+            if (savedPractical) {
+                practicalInputsState = JSON.parse(savedPractical);
+                Object.keys(practicalInputsState).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = practicalInputsState[id];
+                });
+            }
+        }
+
+        function getCorrectValue(key) {
+            if (key === 'q1') return 'B';
+            if (key === 'q2') return 'B';
+            if (key === 'q3') return 'A';
+            if (key === 'q4') return 'B';
+            if (key === 'q5') return 'A';
+            if (key === 'q6') return 'B';
+            if (key === 'q7') return 'B';
+            if (key === 'q8') return 'A';
+            if (key === 'q9') return 'A';
+            if (key === 'q10') return 'A';
+            if (key === 'q11') return 'B';
+            if (key === 'q12') return 'A';
+            if (key === 'q13') return 'B';
+            if (key === 'q14') return 'A';
+            if (key === 'q15') return 'B';
+            if (key === 'q16') return 'A';
+            if (key === 'q17') return 'B';
+            return '';
+        }
+
+        function getIncorrectValuePlaceholder(key, correct) {
+            return correct === 'B' ? 'A' : 'B';
+        }
+
+        // Validate spreadsheet values
+        function isPracticalCorrect(id, value) {
+            const val = value.toUpperCase().replace(/\s/g, '');
+            if (id === 'p1') return val.includes("BELANJA");
+            if (id === 'p2') return val.includes("KUITANSI");
+            if (id === 'p3') return val.includes("ASET");
+            if (id === 'p4') return val.includes("KIRI");
+            if (id === 'p5') return val === "1000000";
+            if (id === 'p6') return val === "6000000";
+            if (id === 'p7') return val.includes("COA");
+            if (id === 'p8') return val === "200000";
+            if (id === 'p9') return val === "20000000";
+            if (id === 'p10') return val.includes("TIDAKTERIKAT");
+            if (id === 'p11') return val === "30000000";
+            if (id === 'p12') return val === "20000000";
+            if (id === 'p13') return val === "12000000";
+            if (id === 'p14') return val === "800000";
+            if (id === 'p15') return val === "9000000";
+            if (id === 'p16') return val === "0.8";
+            if (id === 'p17') return val === "620000000";
+            return false;
+        }
+
+        function updateGlobalUI() {
+            const modulesTotalWeight = 17;
+            let totalOverallProgress = 0;
+
+            for (let i = 0; i < 17; i++) {
+                // Calculate Checkbox sub-weight (30%)
+                let checkCount = 0;
+                let checkedChecked = 0;
+                const checkboxes = document.querySelectorAll(`#section${i} input[type="checkbox"]`);
+                checkboxes.forEach(chk => {
+                    checkCount++;
+                    if (chk.checked) checkedChecked++;
+                });
+                const checkWeight = checkCount > 0 ? (checkedChecked / checkCount) * 30 : 30;
+
+                // Calculate Practical input sub-weight (30%)
+                const pId = `p${i+1}`;
+                const pValue = practicalInputsState[pId] || "";
+                const isPCorrect = isPracticalCorrect(pId, pValue);
+                const practicalWeight = isPCorrect ? 30 : 0;
+
+                // Style borders
+                const pInputEl = document.getElementById(pId);
+                if (pInputEl) {
+                    if (pValue === "") {
+                        pInputEl.style.borderColor = "var(--border-color)";
+                    } else if (isPCorrect) {
+                        pInputEl.style.borderColor = "var(--success)";
+                    } else {
+                        pInputEl.style.borderColor = "var(--error)";
+                    }
+                }
+
+                // Calculate Quiz verification sub-weight (40%)
+                const quizKey = `q${i+1}`;
+                const quizCorrect = answersState[quizKey] === true;
+                const quizWeight = quizCorrect ? 40 : 0;
+
+                const moduleProgress = Math.round(checkWeight + practicalWeight + quizWeight);
+
+                const badge = document.getElementById(`badge${i}`);
+                badge.innerHTML = `${moduleProgress}%`;
+                
+                if (moduleProgress === 100) {
+                    badge.style.backgroundColor = "var(--success)";
+                    badge.style.color = "white";
+                } else {
+                    badge.style.backgroundColor = "#cbd5e1";
+                    badge.style.color = "#475569";
+                }
+
+                totalOverallProgress += moduleProgress;
+            }
+
+            const overallPercentage = Math.round(totalOverallProgress / modulesTotalWeight);
+            document.getElementById('progBar').style.width = `${overallPercentage}%`;
+            document.getElementById('mobileProgress').innerHTML = `Progres: ${overallPercentage}%`;
+        }
+
+        function resetAllProgress() {
+            if (confirm("Apakah Anda yakin ingin menghapus seluruh progres belajar, lembar kerja praktik, dan verifikasi kuis?")) {
+                localStorage.removeItem('pesantren_v2_answersState');
+                localStorage.removeItem('pesantren_v2_checklistState');
+                localStorage.removeItem('pesantren_v2_practicalInputsState');
+                
+                answersState = { q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null, q8: null, q9: null, q10: null, q11: null, q12: null, q13: null, q14: null, q15: null, q16: null, q17: null };
+                checklistState = {};
+                practicalInputsState = { p1: "", p2: "", p3: "", p4: "", p5: "", p6: "", p7: "", p8: "", p9: "", p10: "", p11: "", p12: "", p13: "", p14: "", p15: "", p16: "", p17: "" };
+
+                const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"], .practical-input');
+                inputs.forEach(i => {
+                    if (i.type === 'checkbox' || i.type === 'radio') {
+                        i.checked = false;
+                    } else {
+                        i.value = "";
+                        i.style.borderColor = "var(--border-color)";
+                    }
+                });
+
+                const feedbacks = document.querySelectorAll('.feedback');
+                feedbacks.forEach(f => {
+                    f.style.display = "none";
+                    f.className = "feedback";
+                });
+
+                showSection(0);
+                updateGlobalUI();
+                alert("Seluruh progres berhasil diatur ulang!");
+            }
+        }
+    </script>
+</body>
+</html>
